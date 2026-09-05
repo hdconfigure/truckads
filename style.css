@@ -1,0 +1,368 @@
+/* ==========================================================================
+   1. Theme Variables & Swatches
+   ========================================================================== */
+:root {
+  --color-page-bg:       #0d0e11;
+  --color-card-bg:       #13151a;
+  --color-table-bg:      #1a1d24;
+  --color-cell-bg:       #222630;
+  --color-header-bg:     #111318;
+  
+  --color-border:        #2d323f;
+  --color-text-main:     #ffffff;
+  --color-text-muted:    #94a3b8;
+
+  --color-btn-blue-bg:    #1e293b;
+  --color-btn-blue-hover: #334155;
+  --color-btn-blue-border:#3b82f6;
+  
+  --color-btn-navy-bg:    #1e3a8a;
+  --color-btn-navy-hover: #2563eb;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-page-bg);
+  color: var(--color-text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   2. Navigation & Layout
+   ========================================================================== */
+.top-bar {
+  background-color: var(--color-header-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.menu-link,
+.menu-link:link,
+.menu-link:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+
+.menu-link:hover {
+  background-color: var(--color-cell-bg);
+  border-color: var(--color-border);
+}
+
+.menu-text {
+  color: var(--color-text-main);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.menu-link img {
+  width: 22px;
+  height: 22px;
+  display: block;
+  object-fit: contain;
+}
+
+.card-container {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem;
+  max-width: 100%; /* Increased from 600px to fit full cockpit images nicely */
+  width: auto;
+  margin: 0.75rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+.header-banner {
+  background-color: var(--color-table-bg);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-btn-blue-border);
+  border-radius: var(--radius-md);
+  padding: 0.375rem 0.75rem; /* Reduced top & bottom inner margins by half (0.375rem) */
+  margin-bottom: 0.75rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+h1 {
+  color: var(--color-text-main);
+  font-size: 1.75rem;
+  line-height: 1.1; /* Tightens vertical height above/below h1 text */
+  margin-top: 0;
+  margin-bottom: 0.25rem; /* Controls distance between h1 and subtext */
+  letter-spacing: -0.02em;
+}
+
+p.description {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  font-style: italic;
+  line-height: 1.2; /* Tightens vertical height above/below subtext */
+  margin-top: 0;
+  margin-bottom: 0; /* Removes extra spacing below the description */
+}
+
+/* ==========================================================================
+   3. Table & Cell Styles (Fixed Table Formatting)
+   ========================================================================== */
+/* General Table Wrapper Default */
+.table-wrapper {
+  background-color: var(--color-table-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content; /* Shrinks the wrapper tightly around small elements like buttons */
+  max-width: 100%;
+}
+
+/* Image-Specific Wrapper Sizing */
+@media (orientation: landscape) {
+  /* Targets wrappers that specifically contain an image container */
+  .table-wrapper:has(.image-cell-flush) {
+    width: 100%;
+    max-width: 40%;
+  }
+}
+
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  color: var(--color-text-main);
+}
+
+th {
+  background-color: var(--color-header-bg);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  /* Removed display: block */
+}
+
+td.action-cell {
+  background-color: var(--color-cell-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  text-align: center;
+  vertical-align: middle;
+  /* Removed display: block */
+}
+
+td.action-cell img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--radius-sm);
+}
+
+.info-block {
+  background-color: var(--color-cell-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  color: var(--color-text-main);
+  margin-bottom: 0.75rem;
+}
+
+.info-block p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   4. Universal Button Link Protection
+   ========================================================================== */
+td a.table-btn,
+td a.table-btn:link,
+td a.table-btn:visited {
+  display: inline-block;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-main) !important;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Slate Blue Style */
+td a.table-btn-slate,
+td a.table-btn-slate:link,
+td a.table-btn-slate:visited {
+  background-color: var(--color-btn-blue-bg) !important;
+  border: 1px solid var(--color-btn-blue-border) !important;
+}
+
+td a.table-btn-slate:hover {
+  background-color: var(--color-btn-blue-hover) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Navy Style Option */
+td a.table-btn-navy,
+td a.table-btn-navy:link,
+td a.table-btn-navy:visited {
+  background-color: var(--color-btn-navy-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+td a.table-btn-navy:hover {
+  background-color: var(--color-btn-navy-hover) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transform: translateY(-1px);
+}
+
+td a.table-btn:active {
+  transform: translateY(0);
+}
+
+
+/* ==========================================================================
+   Subheader Component (Layered)
+   ========================================================================== */
+.subheader-wrapper {
+  background-color: var(--color-table-bg); /* Outer lighter gray box */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem; /* Creates spacing around the inner box */
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.subheader-inner {
+  background-color: var(--color-cell-bg); /* Inner darker gray box */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+}
+
+h2.subheader-title {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* ==========================================================================
+  extra image code
+   ========================================================================== */
+
+.image-cell-flush {
+  background-color: var(--color-cell-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0;
+  overflow: hidden;
+  
+  /* Restricts picture width and centers it inside the outer table box */
+  max-width: 100%; /* Adjust this value (e.g., 600px - 900px) to fit your preferred desktop size */
+  margin: 0 auto;   /* Keeps the image centered within the outer wrapper */
+}
+
+.image-cell-flush {
+  background-color: var(--color-cell-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0;
+  overflow: hidden;
+  width: 100%; /* Fills the inner space right up to the 0.75rem padding */
+}
+
+.image-cell-flush img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-sm);
+}
+/* ==========================================================================
+   Standalone Button Styles
+   ========================================================================== */
+a.table-btn,
+a.table-btn:link,
+a.table-btn:visited {
+  display: block; /* Fills available width or stays centered depending on container */
+  width: fit-content;
+  margin: 0 auto 0.75rem auto; /* Centers button and gives uniform bottom spacing */
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-main) !important;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Slate Blue Style */
+a.table-btn-slate,
+a.table-btn-slate:link,
+a.table-btn-slate:visited {
+  background-color: var(--color-btn-blue-bg) !important;
+  border: 1px solid var(--color-btn-blue-border) !important;
+}
+
+a.table-btn-slate:hover {
+  background-color: var(--color-btn-blue-hover) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Navy Style Option */
+a.table-btn-navy,
+a.table-btn-navy:link,
+a.table-btn-navy:visited {
+  background-color: var(--color-btn-navy-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+a.table-btn-navy:hover {
+  background-color: var(--color-btn-navy-hover) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transform: translateY(-1px);
+}
+
+a.table-btn:active {
+  transform: translateY(0);
+}
